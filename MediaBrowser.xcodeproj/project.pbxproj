@@ -99,7 +99,6 @@
 			files = (
 				71596D6C20148BBE00870E29 /* SDWebImage.framework in Frameworks */,
 				71596D6E20148BC300870E29 /* UICircularProgressRing.framework in Frameworks */,
-				1782752C1C0AD35E459547A2 /* Pods_MediaBrowser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +327,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "test -z \"${CARTHAGE}\" || exit 0\n\ndiff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		369573559A2B17E91D9089BA /* [CP] Embed Pods Frameworks */ = {
@@ -380,7 +379,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowser/Pods-MediaBrowser-resources.sh\"\n";
+			shellScript = "test -z \"${CARTHAGE}\" || exit 0\n\n\"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowser/Pods-MediaBrowser-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EE79300A0D923DC6E0E0A33D /* [CP] Check Pods Manifest.lock */ = {
