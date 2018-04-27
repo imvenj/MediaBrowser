@@ -123,7 +123,7 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
             cell.isSelected = b.photoIsSelectedAtIndex(index: indexPath.row)
             if let placeholder = self.browser?.placeholderImage {
                 cell.placeholderImage = placeholder.image
-                cell.imageView.image = placeholder.image
+                cell.imageView.sd_setImage(with: nil, placeholderImage: placeholder.image)
             }
             
             if let _ = b.image(for: photo) {

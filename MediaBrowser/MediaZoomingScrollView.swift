@@ -81,9 +81,9 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         playButton = nil
         photoImageView.isHidden = false
         if let placeholder = self.mediaBrowser.placeholderImage, placeholder.isAppliedForAll || (!placeholder.isAppliedForAll && self.index == self.mediaBrowser.currentIndex) {
-            photoImageView.image = self.mediaBrowser.placeholderImage?.image
+            photoImageView.sd_setLocalImage(self.mediaBrowser.placeholderImage?.image)
         } else {
-            photoImageView.image = nil
+            photoImageView.sd_setLocalImage(nil)
         }
         photoImageView.alpha = 0.8
         index = Int.max
@@ -152,7 +152,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
                 
                 // Set image
                 photoImageView.alpha = 1.0
-                photoImageView.image = img
+                photoImageView.sd_setLocalImage(img)
                 photoImageView.isHidden = false
                 
                 // Setup photo frame
@@ -176,9 +176,9 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
     func displayImageFailure() {
         hideLoadingIndicator()
         if let placeholder = self.mediaBrowser.placeholderImage, placeholder.isAppliedForAll || (!placeholder.isAppliedForAll && self.index == self.mediaBrowser.currentIndex) {
-            photoImageView.image = self.mediaBrowser.placeholderImage?.image
+            photoImageView.sd_setLocalImage(self.mediaBrowser.placeholderImage?.image)
         } else {
-            photoImageView.image = nil
+            photoImageView.sd_setLocalImage(nil)
         }
         photoImageView.alpha = 0.8
         

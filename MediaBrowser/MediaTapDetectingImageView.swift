@@ -8,8 +8,9 @@
 //
 
 import Foundation
+import SDWebImage
 
-class MediaTapDetectingImageView: UIImageView {
+class MediaTapDetectingImageView: FLAnimatedImageView {
     weak var tapDelegate: TapDetectingImageViewDelegate?
     
     override init(frame: CGRect) {
@@ -55,6 +56,10 @@ class MediaTapDetectingImageView: UIImageView {
 
     private func handleTripleTap(touch: UITouch) {
         tapDelegate?.tripleTapDetectedInImageView(view: self, touch: touch)
+    }
+
+    public func sd_setLocalImage(_ image: UIImage?) {
+        sd_setImage(with: nil, placeholderImage: image)
     }
 }
 

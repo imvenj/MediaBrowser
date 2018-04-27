@@ -8,6 +8,7 @@
 
 import UIKit
 import UICircularProgressRing
+import SDWebImage
 
 class MediaGridCell: UICollectionViewCell {
     let videoIndicatorPadding = CGFloat(10.0)
@@ -15,7 +16,7 @@ class MediaGridCell: UICollectionViewCell {
     var index = 0
     var selectionMode = false
     
-    let imageView = UIImageView()
+    let imageView = FLAnimatedImageView()
     var placeholderImage: UIImage?
     let videoIndicator = UIImageView()
     var loadingError: UIImageView?
@@ -199,9 +200,9 @@ class MediaGridCell: UICollectionViewCell {
     func displayImage() {
         if let p = Media {
             if let image = p.underlyingImage {
-                imageView.image = image
+                imageView.sd_setImage(with: nil, placeholderImage: image)
             } else {
-                imageView.image = self.placeholderImage
+                imageView.sd_setImage(with: nil, placeholderImage: self.placeholderImage)
             }
             selectedButton.isHidden = !selectionMode
             self.hideImageFailure()
@@ -285,7 +286,7 @@ class MediaGridCell: UICollectionViewCell {
         }
         
         hideLoadingIndicator()
-        imageView.image = self.placeholderImage
+        imageView.sd_setImage(with: nil, placeholderImage: self.placeholderImage)
     }
     
     func hideImageFailure() {

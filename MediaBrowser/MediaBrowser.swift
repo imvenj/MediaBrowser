@@ -1295,7 +1295,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if let placeholder = self.placeholderImage {
             if placeholder.isAppliedForAll || (!placeholder.isAppliedForAll && index == self.currentPageIndex) {
                 if page.photoImageView.image == nil || page.photoImageView.image === placeholder.image {
-                    page.photoImageView.image = self.placeholderImage?.image
+                    page.photoImageView.sd_setLocalImage(self.placeholderImage?.image)
                     page.photoImageView.transform = CGAffineTransform.identity
                     page.photoImageView.alpha = 0.8
                     page.alignCenterMedia()
