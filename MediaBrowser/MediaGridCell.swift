@@ -56,7 +56,7 @@ class MediaGridCell: UICollectionViewCell {
         addSubview(videoIndicator)
         
         // Selection button
-        selectedButton.contentMode = UIViewContentMode.topRight
+        selectedButton.contentMode = UIView.ContentMode.topRight
         selectedButton.adjustsImageWhenHighlighted = false
         
         selectedButton.setImage(

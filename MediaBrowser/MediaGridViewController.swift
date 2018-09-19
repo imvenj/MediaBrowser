@@ -79,7 +79,7 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
             }
             
             if !currentVisible {
-                collectionView!.scrollToItem(at: currentPhotoIndexPath, at: UICollectionViewScrollPosition.left, animated: false)
+                collectionView!.scrollToItem(at: currentPhotoIndexPath, at: UICollectionView.ScrollPosition.left, animated: false)
             }
         }
     }
@@ -169,6 +169,6 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let margin = self.margin
-        return UIEdgeInsetsMake(margin, margin, margin, margin)
+        return UIEdgeInsets.init(top: margin, left: margin, bottom: margin, right: margin)
     }
 }

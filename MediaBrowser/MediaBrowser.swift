@@ -388,20 +388,20 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             
             previousButton = UIBarButtonItem(
                 image: previousButtonImage,
-                style: UIBarButtonItemStyle.plain,
+                style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(MediaBrowser.gotoPreviousPage))
             
             nextButton = UIBarButtonItem(
                 image: nextButtonImage,
-                style: UIBarButtonItemStyle.plain,
+                style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(MediaBrowser.gotoNextPage))
         }
         
         if displayActionButton {
             actionButton = UIBarButtonItem(
-                barButtonSystemItem: UIBarButtonSystemItem.action,
+                barButtonSystemItem: UIBarButtonItem.SystemItem.action,
                 target: self,
                 action: #selector(actionButtonPressed(_:)))
         }
@@ -471,7 +471,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             if navi.viewControllers.count > 0 && navi.viewControllers[0] == self {
                 // We're first on stack so show done button
                 doneButton = UIBarButtonItem(
-                    barButtonSystemItem: UIBarButtonSystemItem.done,
+                    barButtonSystemItem: UIBarButtonItem.SystemItem.done,
                     target: self,
                     action: #selector(doneButtonPressed))
                 
@@ -718,13 +718,13 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      
      - Parameter parent: UIViewController
      */
-    public override func willMove(toParentViewController parent: UIViewController?) {
+    public override func willMove(toParent parent: UIViewController?) {
         if parent != nil && hasBelongedToViewController {
             fatalError("MediaBrowser Instance Reuse")
         }
 
         if let navBar = navigationController?.navigationBar, didSavePreviousStateOfNavBar, parent == nil {
-            navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
+            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
             navBar.backgroundColor = previousNavigationBarBackgroundColor
             if previousNavigationBarTintColor != nil {
                 navBar.barTintColor = previousNavigationBarTintColor
@@ -738,7 +738,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      
      - Parameter parent: UIViewController
      */
-    public override func didMove(toParentViewController parent: UIViewController?) {
+    public override func didMove(toParent parent: UIViewController?) {
         if nil == parent {
             hasBelongedToViewController = true
         }
@@ -750,7 +750,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         navigationController?.setNavigationBarHidden(false, animated: animated)
     
         if let navBar = navigationController?.navigationBar {
-            navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:navigationBarTextColor]
+            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:navigationBarTextColor]
             navBar.backgroundColor = navigationBarBackgroundColor
             navBar.tintColor = navigationBarTextColor
             navBar.barTintColor = navigationBarTintColor
@@ -778,7 +778,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             navi.setNavigationBarHidden(previousNavigationBarHidden, animated: animated)
             
             let navBar = navi.navigationBar
-            navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
+            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
             navBar.backgroundColor = previousNavigationBarBackgroundColor
             navBar.tintColor = previousNavigationBarTextColor
             navBar.isTranslucent = previousNavigationBarTranslucent
@@ -1678,7 +1678,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             player.modalTransitionStyle = .crossDissolve
             
             do {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
                 try AVAudioSession.sharedInstance().setActive(true)
             } catch let error as NSError {
                 print(error)
@@ -1790,7 +1790,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             skipNextPagingScrollViewPositioning = true
             
             // Add as a child view controller
-            addChildViewController(gc)
+            addChild(gc)
             view.addSubview(gc.view)
         
             // Perform any adjustments
@@ -1810,7 +1810,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             setControlsHidden(hidden: false, animated: true, permanent: true)
             
             // Animate grid in and photo scroller out
-            gc.willMove(toParentViewController: self)
+            gc.willMove(toParent: self)
 
             let changes: () -> Void = {
                 gc.view.alpha = 1.0
@@ -1818,7 +1818,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             }
 
             let completion: (Bool) -> Void = { _ in
-                gc.didMove(toParentViewController: self)
+                gc.didMove(toParent: self)
             }
 
             if disableGridAnimations {
@@ -1866,9 +1866,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             }
 
             let completion: (Bool) -> Void = { _ in
-                gc.willMove(toParentViewController: nil)
+                gc.willMove(toParent: nil)
                 gc.view.removeFromSuperview()
-                gc.removeFromParentViewController()
+                gc.removeFromParent()
 
                 self.setControlsHidden(hidden: false, animated: true, permanent: false) // retrigger timer
             }

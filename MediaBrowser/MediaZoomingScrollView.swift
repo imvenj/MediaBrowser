@@ -60,7 +60,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         delegate = self
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
-        decelerationRate = UIScrollViewDecelerationRateFast
+        decelerationRate = UIScrollView.DecelerationRate.fast
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
