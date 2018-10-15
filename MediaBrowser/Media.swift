@@ -138,7 +138,7 @@ open class Media: NSObject {
     }
 
     //MARK: - Photo Protocol Methods
-    func loadUnderlyingImageAndNotify() {
+    public func loadUnderlyingImageAndNotify() {
         assert(Thread.current.isMainThread, "This method must be called on the main thread.")
         
         if loadingInProgress {
