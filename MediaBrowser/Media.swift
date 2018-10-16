@@ -12,9 +12,6 @@ import AssetsLibrary
 import Photos
 import SDWebImage
 
-let MEDIA_LOADING_DID_END_NOTIFICATION  = "MEDIA_LOADING_DID_END_NOTIFICATION"
-let MEDIA_PROGRESS_NOTIFICATION  = "MEDIA_PROGRESS_NOTIFICATION"
-
 var PHInvalidImageRequestID = PHImageRequestID(0)
 
 /// Media is object for photo and video
@@ -33,6 +30,9 @@ open class Media: NSObject {
     /// underlyingImage
     public var underlyingImage: UIImage?
     public var placeholderImage: UIImage?
+
+    /// Media Progress Notification
+    public static let mediaProgressNofitication = NSNotification.Name(rawValue: "MEDIA_PROGRESS_NOTIFICATION")
 
     private let uuid = NSUUID().uuidString
     private var image: UIImage?
@@ -197,7 +197,7 @@ open class Media: NSObject {
             "photo" : self
             ] as [String : Any]
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MEDIA_PROGRESS_NOTIFICATION), object: dict)
+            NotificationCenter.default.post(name: Media.mediaProgressNofitication, object: dict)
             
         }) { [weak self] (image, _, error, cacheType, finish, imageUrl) in
             guard let wself = self else { return }
@@ -268,7 +268,7 @@ open class Media: NSObject {
                 "photo" : self
             ] as [String : Any]
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: MEDIA_PROGRESS_NOTIFICATION), object: dict)
+            NotificationCenter.default.post(name: Media.mediaProgressNofitication, object: dict)
         }
         
         assetRequestID = imageManager.requestImage(
@@ -304,7 +304,7 @@ open class Media: NSObject {
 
     private func postCompleteNotification() {
         NotificationCenter.default.post(
-            name: NSNotification.Name(rawValue: MEDIA_LOADING_DID_END_NOTIFICATION),
+            name: MediaBrowser.mediaLoadingDidEndNotification,
             object: self)
     }
     

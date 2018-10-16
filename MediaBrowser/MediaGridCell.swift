@@ -78,18 +78,18 @@ class MediaGridCell: UICollectionViewCell {
         // Loading indicator
         loadingIndicator.isUserInteractionEnabled = false
         addSubview(loadingIndicator)
-        
+
         // Listen for photo loading notifications
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(setProgressFromNotification),
-            name: NSNotification.Name(rawValue: MEDIA_PROGRESS_NOTIFICATION),
+            name: Media.mediaProgressNofitication,
             object: nil)
         
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handlePhotoLoadingDidEndNotification),
-            name: NSNotification.Name(rawValue: MEDIA_LOADING_DID_END_NOTIFICATION),
+            name: MediaBrowser.mediaLoadingDidEndNotification,
             object: nil)
     }
     
@@ -172,11 +172,11 @@ class MediaGridCell: UICollectionViewCell {
     
     //MARK: - Image Handling
     
-    var Media: Media?
+    var media: Media?
     
     var photo: Media? {
         set(p) {
-            Media = p
+            media = p
             
             if let ph = p {
                 videoIndicator.isHidden = !ph.isVideo
@@ -192,12 +192,12 @@ class MediaGridCell: UICollectionViewCell {
         }
         
         get {
-            return Media
+            return media
         }
     }
     
     func displayImage() {
-        if let p = Media {
+        if let p = media {
             if let image = p.underlyingImage {
                 imageView.image = image
             } else {
@@ -307,7 +307,7 @@ class MediaGridCell: UICollectionViewCell {
     }
     
     @objc func handlePhotoLoadingDidEndNotification(notification: NSNotification) {
-        if let p = notification.object as? Media, let mwp = Media, photosEqual(p1: p, mwp) {
+        if let p = notification.object as? Media, let mwp = media, photosEqual(p1: p, mwp) {
             if p.underlyingImage != nil {
                 // Successful load
                 displayImage()

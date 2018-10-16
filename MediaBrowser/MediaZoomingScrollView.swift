@@ -53,7 +53,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(setProgressFromNotification),
-            name: NSNotification.Name(rawValue: MEDIA_PROGRESS_NOTIFICATION),
+            name: Media.mediaProgressNofitication,
             object: nil)
         
         // Setup

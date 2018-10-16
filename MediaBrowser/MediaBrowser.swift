@@ -223,6 +223,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
      */
     public var placeholderImage: (image: UIImage, isAppliedForAll: Bool)?
 
+    /// Media Loading Did End Notification
+    public static let mediaLoadingDidEndNotification = NSNotification.Name(rawValue: "MEDIA_LOADING_DID_END_NOTIFICATION")
+
     //MARK: - Init
     
     /**
@@ -284,7 +287,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handlePhotoLoadingDidEndNotification),
-            name: NSNotification.Name(rawValue: MEDIA_LOADING_DID_END_NOTIFICATION),
+            name: MediaBrowser.mediaLoadingDidEndNotification,
             object: nil)
     }
 
