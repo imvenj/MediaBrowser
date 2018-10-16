@@ -293,7 +293,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         }
         
         // Image is smaller than screen so no zooming!
-        if xScale >= 1.0 && yScale >= 1.0 {
+        if mediaBrowser.zoomPhotosToFill != true && xScale >= 1.0 && yScale >= 1.0 {
             minScale = 1.0
         }
         
