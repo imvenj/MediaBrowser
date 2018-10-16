@@ -402,10 +402,6 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
     }
     
     //MARK: - Tap Detection
-    func handleSingleTap(touchPoint: CGPoint) {
-        mediaBrowser.perform(#selector(MediaBrowser.toggleControls), with: nil, afterDelay: 0.2)
-    }
-    
     func handleDoubleTap(touchPoint: CGPoint) {
         // Dont double tap to zoom if showing a video
         if displayingVideo() {
@@ -433,7 +429,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
     
     // Image View
     func singleTapDetectedInImageView(view: UIImageView, touch: UITouch) {
-        handleSingleTap(touchPoint: touch.location(in: view))
+        singleTapDetectedInView(view: view.window!, touch: touch)
     }
     
     func doubleTapDetectedInImageView(view: UIImageView, touch: UITouch) {
@@ -447,29 +443,35 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
     // Background View
     func singleTapDetectedInView(view: UIView, touch: UITouch) {
         // Translate touch location to image view location
-        var touchX = touch.location(in: view).x
-        var touchY = touch.location(in: view).y
-        touchX *= 1.0 / self.zoomScale
-        touchY *= 1.0 / self.zoomScale
-        touchX += self.contentOffset.x
-        touchY += self.contentOffset.y
-        
-        handleSingleTap(touchPoint: CGPoint(x: touchX, y: touchY))
+        let touchX = touch.location(in: view).x
+        let width = view.frame.width
+        if touchX < width * 0.25 && touch.tapCount == 1 {
+            mediaBrowser.gotoPreviousPage()
+        }
+        else if touchX > width * 0.75 && touch.tapCount == 1 {
+            mediaBrowser.gotoNextPage()
+        }
+        else {
+            mediaBrowser.perform(#selector(MediaBrowser.toggleControls), with: nil, afterDelay: 0.2)
+        }
     }
     
     func doubleTapDetectedInView(view: UIView, touch: UITouch) {
         // Translate touch location to image view location
+        handleDoubleTap(touchPoint: translateLocation(of: touch, inView: view))
+    }
+    
+    func tripleTapDetectedInView(view: UIView, touch: UITouch) {
+        
+    }
+
+    func translateLocation(of touch: UITouch, inView view: UIView) -> CGPoint {
         var touchX = touch.location(in: view).x
         var touchY = touch.location(in: view).y
         touchX *= 1.0 / self.zoomScale
         touchY *= 1.0 / self.zoomScale
         touchX += self.contentOffset.x
         touchY += self.contentOffset.y
-        
-        handleDoubleTap(touchPoint: CGPoint(x: touchX, y: touchY))
-    }
-    
-    func tripleTapDetectedInView(view: UIView, touch: UITouch) {
-        
+        return CGPoint(x: touchX, y: touchY)
     }
 }
