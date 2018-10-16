@@ -224,7 +224,10 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     public var placeholderImage: (image: UIImage, isAppliedForAll: Bool)?
 
     /// Media Loading Did End Notification
-    public static let mediaLoadingDidEndNotification = NSNotification.Name(rawValue: "MEDIA_LOADING_DID_END_NOTIFICATION")
+    public static let mediaLoadingDidEndNotification = NSNotification.Name(rawValue: "MEDIABROWSER_MEDIA_LOADING_DID_END_NOTIFICATION")
+
+    /// No More Media Notification
+    public static let noMoreMediaNotification = NSNotification.Name(rawValue: "MEDIABROWSER_NO_MORE_MEDIA_NOTIFICATION")
 
     //MARK: - Init
     
@@ -1605,10 +1608,18 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
 
     func showPreviousPhotoAnimated(animated: Bool) {
+        if currentPageIndex == 0 {
+            NotificationCenter.default.post(name: MediaBrowser.noMoreMediaNotification, object: nil)
+            return
+        }
         jumpToPageAtIndex(index: currentPageIndex - 1, animated: animated)
     }
 
     func showNextPhotoAnimated(animated: Bool) {
+        if currentPageIndex == numberOfMedias - 1 {
+            NotificationCenter.default.post(name: MediaBrowser.noMoreMediaNotification, object: nil)
+            return
+        }
         jumpToPageAtIndex(index: currentPageIndex + 1, animated: animated)
     }
 
