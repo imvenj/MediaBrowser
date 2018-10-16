@@ -55,7 +55,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var previousNavigationBarTranslucent = false
     private var previousNavigationBarStyle = UIBarStyle.default
     private var previousNavigationBarTextColor: UIColor?
-    private var previousNavigationBarBackgroundColor: UIColor?
+    private var previousNavigationTintColor: UIColor?
     private var previousNavigationBarTintColor: UIColor?
     private var previousViewControllerBackButton: UIBarButtonItem?
     private var previousStatusBarStyle: UIStatusBarStyle = .lightContent
@@ -724,12 +724,12 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
 
         if let navBar = navigationController?.navigationBar, didSavePreviousStateOfNavBar, parent == nil {
-            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
-            navBar.backgroundColor = previousNavigationBarBackgroundColor
+            let navBarThemeColor = UINavigationBar.appearance().titleTextAttributes?[.foregroundColor] as? UIColor
+            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:previousNavigationBarTextColor ?? navBarThemeColor ?? UIColor.black]
             if previousNavigationBarTintColor != nil {
                 navBar.barTintColor = previousNavigationBarTintColor
             }
-            navBar.tintColor = previousNavigationBarTextColor
+            navBar.tintColor = previousNavigationTintColor
         }
     }
     
@@ -764,10 +764,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         didSavePreviousStateOfNavBar = true
         
         if let navi = navigationController {
+            let navBarThemeColor = UINavigationBar.appearance().titleTextAttributes?[.foregroundColor] as? UIColor
+            previousNavigationBarTextColor = navi.navigationBar.titleTextAttributes?[.foregroundColor] as? UIColor ?? navBarThemeColor ?? .black
             previousNavigationBarTintColor = navi.navigationBar.barTintColor
-            previousNavigationBarBackgroundColor = navi.navigationBar.backgroundColor
             previousNavigationBarTranslucent = navi.navigationBar.isTranslucent
-            previousNavigationBarTextColor = navi.navigationBar.tintColor
+            previousNavigationTintColor = navi.navigationBar.tintColor
             previousNavigationBarHidden = navi.isNavigationBarHidden
             previousNavigationBarStyle = navi.navigationBar.barStyle
         }
@@ -778,11 +779,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             navi.setNavigationBarHidden(previousNavigationBarHidden, animated: animated)
             
             let navBar = navi.navigationBar
-            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:previousNavigationBarTextColor ?? UIColor.black]
-            navBar.backgroundColor = previousNavigationBarBackgroundColor
-            navBar.tintColor = previousNavigationBarTextColor
+            let navBarThemeColor = UINavigationBar.appearance().titleTextAttributes?[.foregroundColor] as? UIColor
+            navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:previousNavigationBarTextColor ?? navBarThemeColor ?? .black]
+            navBar.tintColor = previousNavigationTintColor ?? UINavigationBar.appearance().tintColor
             navBar.isTranslucent = previousNavigationBarTranslucent
-            navBar.barTintColor = previousNavigationBarTintColor
+            navBar.barTintColor = previousNavigationBarTintColor ?? UINavigationBar.appearance().barTintColor
             navBar.barStyle = previousNavigationBarStyle
 
             // Restore back button if we need to
