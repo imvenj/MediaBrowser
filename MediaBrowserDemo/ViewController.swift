@@ -41,7 +41,7 @@ class ViewController: UITableViewController {
 //        browser.precachingEnabled = true
         
         let font = UIFont.systemFont(ofSize: 12)
-        segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: font],
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font],
                                                 for: .normal)
         segmentedControl.addTarget(self, action: #selector(segmentControlChanged), for: .valueChanged)
         segmentedControl.selectedSegmentIndex = 1

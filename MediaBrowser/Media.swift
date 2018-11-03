@@ -10,7 +10,7 @@
 import UIKit
 import AssetsLibrary
 import Photos
-import SDWebImage
+import Kingfisher
 
 var PHInvalidImageRequestID = PHImageRequestID(0)
 
@@ -41,7 +41,7 @@ open class Media: NSObject {
     private var assetTargetSize = CGSize.zero
     
     private var loadingInProgress = false
-    private var operation: SDWebImageOperation?
+    private var operation: RetrieveImageTask?
     private var assetRequestID = PHInvalidImageRequestID
     
     //MARK: - Init
@@ -191,22 +191,21 @@ open class Media: NSObject {
 
     // Load from local file
     private func performLoadUnderlyingImageAndNotifyWithWebURL(url: URL) {
-        operation = SDWebImageManager.shared().loadImage(with: url, options: [], progress: { (receivedSize, expectedSize, targetURL) in
+        operation = KingfisherManager.shared.retrieveImage(with: url, options: [], progressBlock: { (receivedSize, expectedSize) in
             let dict = [
-            "progress" : min(1.0, CGFloat(receivedSize)/CGFloat(expectedSize)),
-            "photo" : self
-            ] as [String : Any]
-            
+                "progress" : min(1.0, CGFloat(receivedSize)/CGFloat(expectedSize)),
+                "photo" : self
+                ] as [String : Any]
+
             NotificationCenter.default.post(name: Media.mediaProgressNofitication, object: dict)
-            
-        }) { [weak self] (image, _, error, cacheType, finish, imageUrl) in
+        }) { [weak self] (image, error, _, imageUrl) in
             guard let wself = self else { return }
-            
+
             DispatchQueue.main.async {
                 if let _image = image {
                     wself.underlyingImage = _image
                 }
-                
+
                 DispatchQueue.main.async() {
                     wself.imageLoadingComplete()
                 }

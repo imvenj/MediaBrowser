@@ -31,13 +31,13 @@ MediaBrowser can display one or more images or videos by providing either UIImag
   s.source_files     = 'MediaBrowser/*.swift'
   s.resources        = "MediaBrowser/*.xcassets"
 
-  s.ios.deployment_target = '8.1'
+  s.ios.deployment_target = '8.0'
 
   s.frameworks = 'ImageIO', 'QuartzCore', 'AssetsLibrary', 'MediaPlayer'
   s.weak_frameworks = 'Photos'
 
-  s.dependency 'SDWebImage'
+  s.dependency 'Kingfisher'
   s.dependency 'UICircularProgressRing', '~> 1.7.5'
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
   s.requires_arc = true
 end

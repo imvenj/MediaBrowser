@@ -9,7 +9,7 @@
 import UIKit
 import MediaPlayer
 import QuartzCore
-import SDWebImage
+import Kingfisher
 
 func floorcgf(x: CGFloat) -> CGFloat {
     return CGFloat(floorf(Float(x)))
@@ -299,7 +299,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         pagingScrollView.delegate = nil
         NotificationCenter.default.removeObserver(self)
         releaseAllUnderlyingPhotos(preserveCurrent: false)
-        SDImageCache.shared().clearMemory() // clear memory
+        ImageCache.default.clearMemoryCache() // clear memory
     }
 
     private func releaseAllUnderlyingPhotos(preserveCurrent: Bool) {
@@ -1693,7 +1693,13 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             player.modalTransitionStyle = .crossDissolve
             
             do {
-                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+                // Work Around for Apple API Error.
+                if #available(iOS 10.0, *) {
+                    try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+                } else {
+                    // Fallback on earlier versions
+                    AVAudioSession.sharedInstance().perform(NSSelectorFromString("setCategory:error:"), with: AVAudioSession.Category.playback)
+                }
                 try AVAudioSession.sharedInstance().setActive(true)
             } catch let error as NSError {
                 print(error)

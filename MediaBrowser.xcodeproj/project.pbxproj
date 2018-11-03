@@ -22,15 +22,15 @@
 		1906ABE71F5F83960052DC3A /* MediaZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1906ABDC1F5F83960052DC3A /* MediaZoomingScrollView.swift */; };
 		1906ABE91F5F9A100052DC3A /* MediaBrowser.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1906ABE81F5F9A100052DC3A /* MediaBrowser.xcassets */; };
 		1937C4461F5FE9EA00D8724E /* MediaBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1906ABB11F5F81110052DC3A /* MediaBrowser.framework */; };
-		1937C4471F5FE9EA00D8724E /* MediaBrowser.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1906ABB11F5F81110052DC3A /* MediaBrowser.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1937C44C1F610CBF00D8724E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1937C44B1F610CBF00D8724E /* Assets.xcassets */; };
 		1937C44E1F62243F00D8724E /* DemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1937C44D1F62243F00D8724E /* DemoData.swift */; };
 		19B277C01F63BE5400194941 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B277BE1F63BE5400194941 /* LaunchScreen.xib */; };
 		19E1F62C1F5FD5F8004D3BA8 /* Atoms.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 19E1F62B1F5FD5F8004D3BA8 /* Atoms.mp4 */; };
 		19E1F62E1F5FD8EE004D3BA8 /* MediaBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E1F62D1F5FD8EE004D3BA8 /* MediaBrowserDelegate.swift */; };
-		71596D6C20148BBE00870E29 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71596D6B20148BBE00870E29 /* SDWebImage.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		251E0B74218D3BB20067B78F /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251E0B73218D3BB20067B78F /* Kingfisher.framework */; };
+		251E0B77218D3BB80067B78F /* UICircularProgressRing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71596D6D20148BC300870E29 /* UICircularProgressRing.framework */; };
+		251E0B7C218D3F630067B78F /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251E0B73218D3BB20067B78F /* Kingfisher.framework */; };
 		71596D6E20148BC300870E29 /* UICircularProgressRing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71596D6D20148BC300870E29 /* UICircularProgressRing.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		786961890EA7C05AB0704224 /* Pods_MediaBrowserDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7711DC6E06460185D3F457 /* Pods_MediaBrowserDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,20 +42,6 @@
 			remoteInfo = MediaBrowser;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		1937C44A1F5FE9EA00D8724E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				1937C4471F5FE9EA00D8724E /* MediaBrowser.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0E7711DC6E06460185D3F457 /* Pods_MediaBrowserDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaBrowserDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +68,8 @@
 		19B277BF1F63BE5400194941 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		19E1F62B1F5FD5F8004D3BA8 /* Atoms.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Atoms.mp4; sourceTree = "<group>"; };
 		19E1F62D1F5FD8EE004D3BA8 /* MediaBrowserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaBrowserDelegate.swift; sourceTree = "<group>"; };
+		251E0B73218D3BB20067B78F /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		251E0B7A218D3F5E0067B78F /* Kingfisher.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Kingfisher.framework.dSYM; path = Carthage/Build/iOS/Kingfisher.framework.dSYM; sourceTree = "<group>"; };
 		570922FC966732103FB7D306 /* Pods_MediaBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71596D6B20148BBE00870E29 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 		71596D6D20148BC300870E29 /* UICircularProgressRing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UICircularProgressRing.framework; path = Carthage/Build/iOS/UICircularProgressRing.framework; sourceTree = "<group>"; };
@@ -92,8 +80,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71596D6C20148BBE00870E29 /* SDWebImage.framework in Frameworks */,
 				71596D6E20148BC300870E29 /* UICircularProgressRing.framework in Frameworks */,
+				251E0B7C218D3F630067B78F /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,8 +89,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				251E0B77218D3BB80067B78F /* UICircularProgressRing.framework in Frameworks */,
+				251E0B74218D3BB20067B78F /* Kingfisher.framework in Frameworks */,
 				1937C4461F5FE9EA00D8724E /* MediaBrowser.framework in Frameworks */,
-				786961890EA7C05AB0704224 /* Pods_MediaBrowserDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +101,7 @@
 		1906ABA71F5F81110052DC3A = {
 			isa = PBXGroup;
 			children = (
+				251E0B73218D3BB20067B78F /* Kingfisher.framework */,
 				1906ABB31F5F81120052DC3A /* MediaBrowser */,
 				1906ABC11F5F812D0052DC3A /* MediaBrowserDemo */,
 				1906ABB21F5F81110052DC3A /* Products */,
@@ -166,6 +156,7 @@
 		C20AA726BED7B222DA9A2FE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				251E0B7A218D3F5E0067B78F /* Kingfisher.framework.dSYM */,
 				71596D6D20148BC300870E29 /* UICircularProgressRing.framework */,
 				71596D6B20148BBE00870E29 /* SDWebImage.framework */,
 				570922FC966732103FB7D306 /* Pods_MediaBrowser.framework */,
@@ -210,13 +201,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1906ABD11F5F812D0052DC3A /* Build configuration list for PBXNativeTarget "MediaBrowserDemo" */;
 			buildPhases = (
-				EE79300A0D923DC6E0E0A33D /* [CP] Check Pods Manifest.lock */,
 				1906ABBC1F5F812D0052DC3A /* Sources */,
 				1906ABBD1F5F812D0052DC3A /* Frameworks */,
 				1906ABBE1F5F812D0052DC3A /* Resources */,
-				369573559A2B17E91D9089BA /* [CP] Embed Pods Frameworks */,
-				9BD587AB7EFBDA9DDAD0ECB9 /* [CP] Copy Pods Resources */,
-				1937C44A1F5FE9EA00D8724E /* Embed Frameworks */,
+				251E0B79218D3BF30067B78F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -235,7 +223,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Seungyoun Yi";
 				TargetAttributes = {
 					1906ABB01F5F81110052DC3A = {
@@ -246,6 +234,7 @@
 					1906ABBF1F5F812D0052DC3A = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 4G7K3CN2JU;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -292,60 +281,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		369573559A2B17E91D9089BA /* [CP] Embed Pods Frameworks */ = {
+		251E0B79218D3BF30067B78F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowserDemo/Pods-MediaBrowserDemo-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/MediaBrowser/MediaBrowser.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
+			inputFileListPaths = (
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/UICircularProgressRing.framework",
+			);
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MediaBrowser.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/UICircularProgressRing.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowserDemo/Pods-MediaBrowserDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9BD587AB7EFBDA9DDAD0ECB9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MediaBrowserDemo/Pods-MediaBrowserDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EE79300A0D923DC6E0E0A33D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MediaBrowserDemo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -422,6 +377,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -429,6 +385,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -484,6 +441,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -491,6 +449,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -541,7 +500,7 @@
 				);
 				INFOPLIST_FILE = MediaBrowser/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.MediaBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -568,7 +527,7 @@
 				);
 				INFOPLIST_FILE = MediaBrowser/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.MediaBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -583,12 +542,16 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MediaBrowserDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.MediaBrowserDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -598,12 +561,16 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MediaBrowserDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.MediaBrowserDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
