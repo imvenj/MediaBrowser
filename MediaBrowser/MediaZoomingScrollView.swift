@@ -293,7 +293,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         }
         
         // Image is smaller than screen so no zooming!
-        if mediaBrowser.zoomPhotosToFill != true && xScale >= 1.0 && yScale >= 1.0 {
+        if !mediaBrowser.zoomPhotosToFill && xScale >= 1.0 && yScale >= 1.0 {
             minScale = 1.0
         }
         
@@ -305,7 +305,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         zoomScale = initialZoomScaleWithMinScale()
         
         // If we're zooming to fill then centralise
-        if zoomScale != minScale {
+        if !mediaBrowser.zoomPhotosToFill && zoomScale != minScale {
             // Centralise
             contentOffset = CGPoint(x: (imageSize.width * zoomScale - boundsSize.width) / 2.0, y: (imageSize.height * zoomScale - boundsSize.height) / 2.0)
         }
