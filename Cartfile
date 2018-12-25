@@ -1,2 +1,2 @@
 github "luispadron/UICircularProgressRing"
-github "onevcat/Kingfisher"
+github "onevcat/Kingfisher" ~> '4.10.1'
