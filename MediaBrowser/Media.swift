@@ -41,7 +41,7 @@ open class Media: NSObject {
     private var assetTargetSize = CGSize.zero
     
     private var loadingInProgress = false
-    private var operation: RetrieveImageTask?
+    private var operation: DownloadTask?
     private var assetRequestID = PHInvalidImageRequestID
     
     //MARK: - Init
@@ -198,11 +198,11 @@ open class Media: NSObject {
                 ] as [String : Any]
 
             NotificationCenter.default.post(name: Media.mediaProgressNofitication, object: dict)
-        }) { [weak self] (image, error, _, imageUrl) in
+        }) { [weak self] (result) in
             guard let wself = self else { return }
 
             DispatchQueue.main.async {
-                if let _image = image {
+                if let _image = (try? result.get())?.image {
                     wself.underlyingImage = _image
                 }
 

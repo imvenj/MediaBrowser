@@ -1,3 +1,2 @@
-github "luispadron/UICircularProgressRing" "v4.1.0"
-github "onevcat/Kingfisher" "4.10.0"
-github "rs/SDWebImage" "4.4.2"
+github "luispadron/UICircularProgressRing" "v6.0.2"
+github "onevcat/Kingfisher" "5.3.0"
