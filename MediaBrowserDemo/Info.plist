@@ -20,9 +20,9 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>MediaBrowser Demo</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>MediaBrowser Demo</string>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>MediaBrowser Demo</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
