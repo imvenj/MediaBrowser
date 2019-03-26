@@ -241,7 +241,7 @@
 			};
 			buildConfigurationList = 1906ABAB1F5F81110052DC3A /* Build configuration list for PBXProject "MediaBrowser" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
