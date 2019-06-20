@@ -230,25 +230,21 @@ open class Media: NSObject {
     // Load from asset library async
     private func performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: URL) {
         DispatchQueue.global(qos: .default).async {
-            let assetslibrary = ALAssetsLibrary()
-            assetslibrary.asset(
-                for: url,
-                resultBlock: { asset in
-                    let rep = asset?.defaultRepresentation()
-                    guard let cgImage = rep?.fullScreenImage().takeUnretainedValue() else { return }
-                    self.underlyingImage = UIImage(cgImage: cgImage)
-                    
+            let result = PHAsset.fetchAssets(withALAssetURLs: [url], options: nil)
+            PHImageManager.default().requestImage(for: result.firstObject!, targetSize: UIScreen.main.bounds.size, contentMode: PHImageContentMode.aspectFit, options: nil) { (image, _) in
+                if let image = image {
+                    self.underlyingImage = image
                     DispatchQueue.main.async() {
                         self.imageLoadingComplete()
                     }
-            },
-                    failureBlock: { error in
-                        self.underlyingImage = nil
-                        
-                        DispatchQueue.main.async() {
-                            self.imageLoadingComplete()
-                        }
-                    })
+                }
+                else {
+                    self.underlyingImage = nil
+                    DispatchQueue.main.async() {
+                        self.imageLoadingComplete()
+                    }
+                }
+            }
         }
     }
 

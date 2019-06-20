@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MediaPlayer
+import AVKit
 import QuartzCore
 import Kingfisher
 
@@ -61,7 +61,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     private var previousStatusBarStyle: UIStatusBarStyle = .lightContent
     
     // Video
-    private var currentVideoPlayerViewController: MPMoviePlayerViewController?
+    private var currentVideoPlayerViewController: AVPlayerViewController?
     private var currentVideoIndex = 0
     private var currentVideoLoadingIndicator: UIActivityIndicatorView?
 
@@ -93,10 +93,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     
     /// MediaBrowser has belonged to viewcontroller
     public var hasBelongedToViewController = false
-    
-    /// Check viewcontroller based status bar apperance
-    public var isVCBasedStatusBarAppearance = false
-    
+
     /// Hide or show status bar
     public var statusBarShouldBeHidden = false
     
@@ -273,14 +270,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     }
     
     private func initialisation() {
-        // Defaults
-        if let vcBasedStatusBarAppearance = Bundle.main.object(forInfoDictionaryKey: "UIViewControllerBasedStatusBarAppearance") as? Bool {
-           isVCBasedStatusBarAppearance = vcBasedStatusBarAppearance
-        } else {
-            isVCBasedStatusBarAppearance = true
-        }
-        
-        
         hidesBottomBarWhenPushed = true
         automaticallyAdjustsScrollViewInsets = false
 //        extendedLayoutIncludesOpaqueBars = true
@@ -628,7 +617,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Set style
         if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
             previousStatusBarStyle = UIApplication.shared.statusBarStyle
-            UIApplication.shared.setStatusBarStyle(statusBarStyle, animated: animated)
+            self.setNeedsStatusBarAppearanceUpdate()
         }
 
         setNavBarAppearance(animated: animated)
@@ -712,7 +701,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Status bar
         if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
-            UIApplication.shared.setStatusBarStyle(previousStatusBarStyle, animated: animated)
+            self.setNeedsStatusBarAppearanceUpdate()
         }
 
         // Super
@@ -1684,13 +1673,18 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     func playVideo(videoURL: URL, atPhotoIndex index: Int) {
         // Setup player
-        currentVideoPlayerViewController = MPMoviePlayerViewController(contentURL: videoURL)
+        let player = AVPlayer(url: videoURL)
+        player.allowsExternalPlayback = true
+        player.usesExternalPlaybackWhileExternalScreenIsActive = false
+        currentVideoPlayerViewController = AVPlayerViewController()
+        currentVideoPlayerViewController?.player = player
         
-        if let player = currentVideoPlayerViewController {
-            player.moviePlayer.prepareToPlay()
-            player.moviePlayer.shouldAutoplay = true
-            player.moviePlayer.scalingMode = .aspectFit
-            player.modalTransitionStyle = .crossDissolve
+        if let avPlayerViewController = currentVideoPlayerViewController {
+            avPlayerViewController.modalTransitionStyle = .crossDissolve
+            if #available(iOS 11.0, *) {
+                avPlayerViewController.exitsFullScreenWhenPlaybackEnds = true
+            }
+            avPlayerViewController.allowsPictureInPicturePlayback = false
             
             do {
                 // Work Around for Apple API Error.
@@ -1704,55 +1698,14 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             } catch let error as NSError {
                 print(error)
             }
-        
-            // Remove the movie player view controller from the "playback did finish" falsetification observers
-            // Observe ourselves so we can get it to use the crossfade transition
-            NotificationCenter.default.removeObserver(
-                player,
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
-        
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(videoFinishedCallback),
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
 
             // Show
-            present(player, animated: true, completion: nil)
-        }
-    }
-
-    @objc func videoFinishedCallback(notification: NSNotification) {
-        if let player = currentVideoPlayerViewController {
-            // Remove observer
-            NotificationCenter.default.removeObserver(
-                self,
-                name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                object: player.moviePlayer)
-            
-            // Clear up
-            clearCurrentVideo()
-            
-            // Dismiss
-            if let errorObj = notification.userInfo?[MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] {
-                let error = MPMovieFinishReason(rawValue: errorObj as! Int)
-            
-                if error == .playbackError {
-                    // Error occured so dismiss with a delay incase error was immediate and we need to wait to dismiss the VC
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + Double(1.0 * Double(NSEC_PER_SEC)), execute: {
-                        self.dismiss(animated: true, completion: nil)
-
-                    })
-                    
-                    return
-                }
+            present(avPlayerViewController, animated: true) {
+                avPlayerViewController.player?.play()
             }
         }
-        
-        dismiss(animated: true, completion: nil)
     }
+
 
     func clearCurrentVideo() {
         if currentVideoPlayerViewController != nil {
@@ -1932,20 +1885,12 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Status bar
         if !leaveStatusBarAlone {
             // Hide status bar
-            if !isVCBasedStatusBarAppearance {
-                // falsen-view controller based
-                statusBarShouldBeHidden = hidden
-                UIApplication.shared.setStatusBarHidden(hidden, with: animated ? UIStatusBarAnimation.slide : UIStatusBarAnimation.none)
-                
-            } else {
-                // View controller based so animate away
-                statusBarShouldBeHidden = hidden
-                UIView.animate(
-                    withDuration: animationDuration,
-                    animations: {
-                        self.setNeedsStatusBarAppearanceUpdate()
-                })
-            }
+            statusBarShouldBeHidden = hidden
+            UIView.animate(
+                withDuration: animationDuration,
+                animations: {
+                    self.setNeedsStatusBarAppearanceUpdate()
+            })
         }
         
         // Toolbar, nav bar and captions

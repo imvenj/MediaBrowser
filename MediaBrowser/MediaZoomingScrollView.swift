@@ -409,7 +409,9 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         }
         
         // Cancel any single tap handling
-        NSObject.cancelPreviousPerformRequests(withTarget: mediaBrowser)
+        if let mediaBrowser = mediaBrowser {
+            NSObject.cancelPreviousPerformRequests(withTarget: mediaBrowser)
+        }
         
         // Zoom
         if zoomScale != minimumZoomScale && zoomScale != initialZoomScaleWithMinScale() {
