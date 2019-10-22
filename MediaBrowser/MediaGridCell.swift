@@ -22,6 +22,24 @@ class MediaGridCell: UICollectionViewCell {
     let selectedButton = UIButton(type: .custom)
     
     let loadingIndicator = UICircularProgressRing(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+
+    var circleImage: UIImage? {
+        if #available(iOS 13.0, *) {
+            let configuration = UIImage.SymbolConfiguration(pointSize: 24)
+            return UIImage(systemName: "circle", withConfiguration: configuration)
+        } else {
+            return UIImage.imageForResourcePath(name: "ImageSelectedSmallOff", inBundle: Bundle(for: MediaGridCell.self))
+        }
+    }
+
+    var selectedCircleImage: UIImage? {
+        if #available(iOS 13.0, *) {
+            let configuration = UIImage.SymbolConfiguration(pointSize: 24)
+            return UIImage(systemName: "checkmark.circle", withConfiguration: configuration)
+        } else {
+            return UIImage.imageForResourcePath(name: "ImageSelectedSmallOn", inBundle: Bundle(for: MediaGridCell.self))
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,10 +58,17 @@ class MediaGridCell: UICollectionViewCell {
         
         // Video Image
         videoIndicator.isHidden = false
-        let videoIndicatorImage = UIImage.imageForResourcePath(
-            name: "VideoOverlay",
-            inBundle: Bundle(for: MediaGridCell.self))!
-        
+        let videoIndicatorImage: UIImage
+
+        if #available(iOS 13.0, *) {
+            let configuration = UIImage.SymbolConfiguration(pointSize: 18)
+            videoIndicatorImage = UIImage(systemName: "video", withConfiguration: configuration)!
+        } else {
+            videoIndicatorImage = UIImage.imageForResourcePath(
+                name: "VideoOverlay",
+                inBundle: Bundle(for: MediaGridCell.self))!
+        }
+
         videoIndicator.frame = CGRect(
             x: self.bounds.size.width - videoIndicatorImage.size.width - videoIndicatorPadding,
             y: self.bounds.size.height - videoIndicatorImage.size.height - videoIndicatorPadding,
@@ -58,18 +83,10 @@ class MediaGridCell: UICollectionViewCell {
         // Selection button
         selectedButton.contentMode = UIView.ContentMode.topRight
         selectedButton.adjustsImageWhenHighlighted = false
-        
-        selectedButton.setImage(
-            UIImage.imageForResourcePath(
-                name: "ImageSelectedSmallOff",
-                inBundle: Bundle(for: MediaGridCell.self)),
-            for: .normal)
-        
-        selectedButton.setImage(UIImage.imageForResourcePath(
-            name: "ImageSelectedSmallOn",
-            inBundle: Bundle(for: MediaGridCell.self)),
-                                for: .selected)
-        
+
+        selectedButton.setImage(circleImage, for: .normal)
+        selectedButton.setImage(selectedCircleImage, for: .selected)
+
         selectedButton.addTarget(self, action: #selector(MediaGridCell.selectionButtonPressed), for: .touchDown)
         selectedButton.isHidden = true
         selectedButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
@@ -113,13 +130,13 @@ class MediaGridCell: UICollectionViewCell {
                     if let selectedOffImage = browser.mediaSelectedGridOffIcon {
                         selectedButton.setImage(selectedOffImage, for: .normal)
                     } else {
-                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOff", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .normal)
+                        selectedButton.setImage(circleImage, for: .normal)
                     }
                     
                     if let selectedOnImage = browser.mediaSelectedGridOnIcon {
                         selectedButton.setImage(selectedOnImage, for: .selected)
                     } else {
-                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .selected)
+                        selectedButton.setImage(selectedCircleImage, for: .selected)
                     }
                     
                     loadingIndicator.innerRingColor = browser.loadingIndicatorInnerRingColor
@@ -264,9 +281,16 @@ class MediaGridCell: UICollectionViewCell {
         if let p = photo, p.emptyImage {
             if nil == loadingError {
                 let error = UIImageView()
-                error.image = UIImage.imageForResourcePath(
-                    name: "ImageError",
-                    inBundle: Bundle(for: MediaGridCell.self))
+
+                if #available(iOS 13.0, *) {
+                    let configuration = UIImage.SymbolConfiguration(pointSize: 18)
+                    let image = UIImage(systemName: "xmark", withConfiguration: configuration)
+                    error.image = image
+                } else {
+                    error.image = UIImage.imageForResourcePath(
+                        name: "ImageError",
+                        inBundle: Bundle(for: MediaGridCell.self))
+                }
                 
                 error.isUserInteractionEnabled = false
                 error.sizeToFit()

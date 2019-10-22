@@ -371,22 +371,28 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Toolbar Items
         if displayMediaNavigationArrows {
-            let arrowPathFormat = "UIBarButtonItemArrow"
-            
-            let previousButtonImage = UIImage.imageForResourcePath(
-                name: arrowPathFormat + "Left",
-                inBundle: Bundle(for: MediaBrowser.self))
-            
-            let nextButtonImage = UIImage.imageForResourcePath(
-                name: arrowPathFormat + "Right",
-                inBundle: Bundle(for: MediaBrowser.self))
-            
+            let previousButtonImage: UIImage?
+            let nextButtonImage: UIImage?
+            if #available(iOS 13.0, *) {
+                let configuration = UIImage.SymbolConfiguration(pointSize: 18)
+                previousButtonImage = UIImage(systemName: "arrowtriangle.left", withConfiguration: configuration)
+                nextButtonImage = UIImage(systemName: "arrowtriangle.right", withConfiguration: configuration)
+            } else {
+                let arrowPathFormat = "UIBarButtonItemArrow"
+                previousButtonImage = UIImage.imageForResourcePath(
+                    name: arrowPathFormat + "Left",
+                    inBundle: Bundle(for: MediaBrowser.self))
+                nextButtonImage = UIImage.imageForResourcePath(
+                    name: arrowPathFormat + "Right",
+                    inBundle: Bundle(for: MediaBrowser.self))
+            }
+
             previousButton = UIBarButtonItem(
                 image: previousButtonImage,
                 style: UIBarButtonItem.Style.plain,
                 target: self,
                 action: #selector(MediaBrowser.gotoPreviousPage))
-            
+
             nextButton = UIBarButtonItem(
                 image: nextButtonImage,
                 style: UIBarButtonItem.Style.plain,
@@ -508,9 +514,17 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Left button - Grid
         if enableGrid {
             hasItems = true
-            
+
+            let gridImage: UIImage?
+            if #available(iOS 13.0, *) {
+                let configuration = UIImage.SymbolConfiguration(pointSize: 18)
+                gridImage = UIImage(systemName: "square.grid.2x2", withConfiguration: configuration)
+            } else {
+                gridImage = UIImage.imageForResourcePath(name: "UIBarButtonItemGrid", inBundle: Bundle(for: MediaBrowser.self))
+            }
+
             items.append(UIBarButtonItem(
-                image: UIImage.imageForResourcePath(name: "UIBarButtonItemGrid", inBundle: Bundle(for: MediaBrowser.self)),
+                image: gridImage,
                 style: .plain,
                 target: self,
                 action: #selector(MediaBrowser.showGridAnimated)))
@@ -1201,29 +1215,54 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                 
                 // Add play button if needed
                 if page.displayingVideo() {
-                    let playButton = UIButton(type: .custom)
-                    playButton.setImage(UIImage(named: "PlayButtonOverlayLarge", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .normal)
-                    playButton.setImage(UIImage(named: "PlayButtonOverlayLargeTap", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .highlighted)
+                    let playButton: UIButton
+                    let playButtonImage: UIImage?
+                    let playButtonHighlightedImage: UIImage?
+
+                    if #available(iOS 13.0, *) {
+                        playButton = UIButton(type: .system)
+                        let configuration = UIImage.SymbolConfiguration(pointSize: 42)
+                        playButtonImage = UIImage(systemName: "play.circle", withConfiguration: configuration)
+                        playButtonHighlightedImage = UIImage(systemName: "play.circle", withConfiguration: configuration)
+                        playButton.tintColor = .white
+                    } else {
+                        playButton = UIButton(type: .custom)
+                        playButtonImage = UIImage(named: "PlayButtonOverlayLarge", in: Bundle(for: MediaBrowser.self), compatibleWith: nil)
+                        playButtonHighlightedImage = UIImage(named: "PlayButtonOverlayLargeTap", in: Bundle(for: MediaBrowser.self), compatibleWith: nil)
+                    }
+                    playButton.setImage(playButtonImage, for: .normal)
+                    playButton.setImage(playButtonHighlightedImage, for: .highlighted)
                     playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
                     playButton.sizeToFit()
                     playButton.frame = frameForPlayButton(playButton: playButton, atIndex: index)
                     pagingScrollView.addSubview(playButton)
                     page.playButton = playButton
                 }
-                
+
+                let circleImage: UIImage?
+                let selectedCircleImage: UIImage?
+                if #available(iOS 13.0, *) {
+                    let configuration = UIImage.SymbolConfiguration(pointSize: 24)
+                    circleImage = UIImage(systemName: "circle", withConfiguration: configuration)
+                    selectedCircleImage = UIImage(systemName: "checkmark.circle", withConfiguration: configuration)
+                } else {
+                    circleImage = UIImage.imageForResourcePath(name: "ImageSelectedSmallOff", inBundle: Bundle(for: MediaGridCell.self))
+                    selectedCircleImage = UIImage.imageForResourcePath(name: "ImageSelectedSmallOn", inBundle: Bundle(for: MediaGridCell.self))
+                }
+
                 // Add selected button
                 if self.displaySelectionButtons {
                     let selectedButton = UIButton(type: .custom)
                     if let selectedOffImage = mediaSelectedOffIcon {
                         selectedButton.setImage(selectedOffImage, for: .normal)
                     } else {
-                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOff", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .normal)
+                        selectedButton.setImage(circleImage, for: .normal)
                     }
                     
                     if let selectedOnImage = mediaSelectedOnIcon {
                         selectedButton.setImage(selectedOnImage, for: .selected)
                     } else {
-                        selectedButton.setImage(UIImage(named: "ImageSelectedSmallOn", in: Bundle(for: MediaBrowser.self), compatibleWith: nil), for: .selected)
+                        selectedButton.setImage(selectedCircleImage, for: .selected)
                     }
 
                     selectedButton.sizeToFit()
