@@ -169,10 +169,7 @@ open class Media: NSObject {
             imageLoadingComplete()
         } else if let purl = photoURL {
             // Check what type of url it is
-            if purl.scheme?.lowercased() == "assets-library" {
-                // Load from assets library
-                performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: purl)
-            } else if purl.isFileURL {
+            if purl.isFileURL {
                 // Load from local file async
                 performLoadUnderlyingImageAndNotifyWithLocalFileURL(url: purl)
             } else {
@@ -223,27 +220,6 @@ open class Media: NSObject {
             //}
             
             
-        }
-    }
-    
-    // Load from asset library async
-    private func performLoadUnderlyingImageAndNotifyWithAssetsLibraryURL(url: URL) {
-        DispatchQueue.global(qos: .default).async {
-            let result = PHAsset.fetchAssets(withALAssetURLs: [url], options: nil)
-            PHImageManager.default().requestImage(for: result.firstObject!, targetSize: UIScreen.main.bounds.size, contentMode: PHImageContentMode.aspectFit, options: nil) { (image, _) in
-                if let image = image {
-                    self.underlyingImage = image
-                    DispatchQueue.main.async() {
-                        self.imageLoadingComplete()
-                    }
-                }
-                else {
-                    self.underlyingImage = nil
-                    DispatchQueue.main.async() {
-                        self.imageLoadingComplete()
-                    }
-                }
-            }
         }
     }
 
