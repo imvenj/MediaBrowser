@@ -95,8 +95,6 @@ extension ViewController: MediaBrowserDelegate {
     }
     
     func didDisplayMedia(at index: Int, in mediaBrowser: MediaBrowser) {
-        print("Did start viewing photo at index \(index)")
-
     }
     
     func mediaDid(selected: Bool, at index: Int, in mediaBrowser: MediaBrowser) {

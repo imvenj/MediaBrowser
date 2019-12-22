@@ -61,6 +61,9 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
         decelerationRate = UIScrollView.DecelerationRate.fast
+        if #available(iOS 11.0, *) {
+            contentInset = mediaBrowser.view.safeAreaInsets
+        }
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     

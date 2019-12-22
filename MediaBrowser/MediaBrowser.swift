@@ -1047,7 +1047,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                         if let media = mediaAtIndex(index: pageIndex - i) {
                             if nil == media.underlyingImage {
                                 media.loadUnderlyingImageAndNotify()
-                                print("Pre-loading image at index \(pageIndex - i)")
                             }
                         }
                     }
@@ -1059,7 +1058,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                         if let media = mediaAtIndex(index: pageIndex + i) {
                             if nil == media.underlyingImage {
                                 media.loadUnderlyingImageAndNotify()
-                                print("Pre-loading image at index \(pageIndex + i)")
                             }
                         }
                     }
