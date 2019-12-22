@@ -61,7 +61,7 @@ class MediaGridCell: UICollectionViewCell {
         let videoIndicatorImage: UIImage
 
         if #available(iOS 13.0, *) {
-            let configuration = UIImage.SymbolConfiguration(pointSize: 18)
+            let configuration = UIImage.SymbolConfiguration(pointSize: 36)
             videoIndicatorImage = UIImage(systemName: "video", withConfiguration: configuration)!
         } else {
             videoIndicatorImage = UIImage.imageForResourcePath(
@@ -78,6 +78,7 @@ class MediaGridCell: UICollectionViewCell {
         videoIndicator.image = videoIndicatorImage
         videoIndicator.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         videoIndicator.autoresizesSubviews = true
+        videoIndicator.tintColor = .white
         addSubview(videoIndicator)
         
         // Selection button
@@ -86,6 +87,7 @@ class MediaGridCell: UICollectionViewCell {
 
         selectedButton.setImage(circleImage, for: .normal)
         selectedButton.setImage(selectedCircleImage, for: .selected)
+        selectedButton.tintColor = .white
 
         selectedButton.addTarget(self, action: #selector(MediaGridCell.selectionButtonPressed), for: .touchDown)
         selectedButton.isHidden = true
@@ -240,6 +242,7 @@ class MediaGridCell: UICollectionViewCell {
     
     @objc func selectionButtonPressed() {
         selectedButton.isSelected = !selectedButton.isSelected
+        selectedButton.tintColor = selectedButton.isSelected ? .systemBlue : .white
         
         if let gc = gridController, let browser = gc.browser {
             browser.setPhotoSelected(selected: selectedButton.isSelected, atIndex: index)
@@ -283,9 +286,10 @@ class MediaGridCell: UICollectionViewCell {
                 let error = UIImageView()
 
                 if #available(iOS 13.0, *) {
-                    let configuration = UIImage.SymbolConfiguration(pointSize: 18)
+                    let configuration = UIImage.SymbolConfiguration(pointSize: 24.0)
                     let image = UIImage(systemName: "xmark", withConfiguration: configuration)
                     error.image = image
+                    error.tintColor = .white
                 } else {
                     error.image = UIImage.imageForResourcePath(
                         name: "ImageError",

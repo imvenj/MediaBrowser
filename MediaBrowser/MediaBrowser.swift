@@ -1264,6 +1264,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     } else {
                         selectedButton.setImage(selectedCircleImage, for: .selected)
                     }
+                    selectedButton.tintColor = .white
 
                     selectedButton.sizeToFit()
                     selectedButton.adjustsImageWhenHighlighted = false
@@ -1655,6 +1656,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
     @objc func selectedButtonTapped(sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        sender.tintColor = sender.isSelected ? .systemBlue : .white
     
         var index = Int.max
         for page in visiblePages {
