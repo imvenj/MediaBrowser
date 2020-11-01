@@ -87,7 +87,12 @@ class MediaGridViewController: UICollectionViewController, UICollectionViewDeleg
     //MARK: - Layout
     
     var columns: CGFloat {
-        return floorcgf(x: view.bounds.width / 93.0)
+        if self.collectionView.traitCollection.horizontalSizeClass == .regular {
+            return floorcgf(x: view.bounds.width / 139.0)
+        }
+        else {
+            return floorcgf(x: view.bounds.width / 93.0)
+        }
     }
     
     var margin = CGFloat(5.0)

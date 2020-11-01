@@ -78,7 +78,7 @@ class DemoData {
         
         photo = localMediaPhoto(imageName: "demo7", caption: "Demo Image 7 from Pixabay")
         photos.append(photo)
-        
+
         return photos
     }
     
@@ -113,7 +113,7 @@ class DemoData {
     class func webPhotos() -> [Media] {
         var photos = [Media]()
         
-        var photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/03/11/22/laptop-2575689_1280.jpg", caption: nil)
+        var photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/03/11/22/lapto-2575689_1280.jpg", caption: nil)
         photos.append(photo)
         
         photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/05/22/43/sticky-2586309_1280.jpg", caption: nil)
@@ -191,7 +191,7 @@ class DemoData {
         photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2016/12/20/22/47/harley-1921700_1280.jpg", caption: nil)
         photos.append(photo)
 
-        return photos
+        return photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos
     }
     
     class func singleVideo() -> [Media] {
