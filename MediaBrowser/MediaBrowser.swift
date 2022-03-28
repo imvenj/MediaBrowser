@@ -629,7 +629,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         }
         
         // Set style
-        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+        if !leaveStatusBarAlone && UIDevice.current.userInterfaceIdiom == .phone {
             previousStatusBarStyle = UIApplication.shared.statusBarStyle
             self.setNeedsStatusBarAppearanceUpdate()
         }
@@ -714,7 +714,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         setControlsHidden(hidden: false, animated: false, permanent: true)
         
         // Status bar
-        if !leaveStatusBarAlone && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+        if !leaveStatusBarAlone && UIDevice.current.userInterfaceIdiom == .phone {
             self.setNeedsStatusBarAppearanceUpdate()
         }
 
