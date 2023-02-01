@@ -65,6 +65,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
             contentInset = mediaBrowser.view.safeAreaInsets
         }
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        contentInsetAdjustmentBehavior = .never
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -243,9 +244,6 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
     }
     
     private func showLoadingIndicator() {
-        zoomScale = 0.0
-        minimumZoomScale = 0.0
-        maximumZoomScale = 0.0
         loadingIndicator.startProgress(to: 0.0, duration: 0)
         loadingIndicator.isHidden = false
         
@@ -368,6 +366,7 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         // Center the image as it becomes smaller than the size of the screen
         let boundsSize = bounds.size
         var frameToCenter = photoImageView.frame
+        // print("image frame before center: \(boundsSize) \(frameToCenter)")
 
         // Horizontally
         if frameToCenter.size.width < boundsSize.width {
@@ -382,7 +381,8 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
         } else {
             frameToCenter.origin.y = 0.0
         }
-
+        
+        // print("image frame after center: \(frameToCenter)")
         // Center
         if !photoImageView.frame.equalTo(frameToCenter) {
             photoImageView.frame = frameToCenter
@@ -416,6 +416,11 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
     func handleDoubleTap(touchPoint: CGPoint) {
         // Dont double tap to zoom if showing a video
         if displayingVideo() {
+            return
+        }
+        
+        // Ignore double tap to zoom for failed image.
+        if (photoImageView.image == nil) {
             return
         }
         

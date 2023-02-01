@@ -271,7 +271,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     
     private func initialisation() {
         hidesBottomBarWhenPushed = true
-        automaticallyAdjustsScrollViewInsets = false
+        // automaticallyAdjustsScrollViewInsets = false
 //        extendedLayoutIncludesOpaqueBars = true
 //        navigationController?.view.backgroundColor = UIColor.white
         
@@ -349,14 +349,21 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Setup paging scrolling view
         let pagingScrollViewFrame = frameForPagingScrollView
         pagingScrollView = UIScrollView(frame: pagingScrollViewFrame)
-        pagingScrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        // pagingScrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        pagingScrollView.translatesAutoresizingMaskIntoConstraints = false
         pagingScrollView.isPagingEnabled = true
+        pagingScrollView.isDirectionalLockEnabled = true
         pagingScrollView.delegate = self
         pagingScrollView.showsHorizontalScrollIndicator = false
         pagingScrollView.showsVerticalScrollIndicator = false
         pagingScrollView.backgroundColor = UIColor.black
         pagingScrollView.contentSize = contentSizeForPagingScrollView()
         view.addSubview(pagingScrollView)
+        // Auto layout
+        pagingScrollView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant:0).isActive = true
+        pagingScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        pagingScrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: 0).isActive = true
+        pagingScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
         
         // Toolbar
         toolbar = UIToolbar(frame: frameForToolbar)
@@ -1430,9 +1437,11 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // view, so its frame is in window coordinate space, which is never rotated. Its bounds, however, will be in landscape
         // because it has a rotation transform applied.
         let bounds = pagingScrollView.bounds
+        print("pagingScrollView for \(index) bounds: \(bounds)")
         var pageFrame = bounds
         pageFrame.size.width -= (2.0 * padding)
         pageFrame.origin.x = (bounds.size.width * CGFloat(index)) + padding
+        print("pageFrame for \(index): \(pageFrame.integral), padding: \(padding)")
         return pageFrame.integral
     }
 
@@ -1871,8 +1880,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             view.layoutIfNeeded()
             view.layoutSubviews()
             
-            self.pagingScrollView.frame = self.frameForPagingScrollView
-
             let changes: () -> Void = {
                 gc.view.alpha = 0.0
                 self.pagingScrollView.alpha = 1.0
@@ -1913,18 +1920,18 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         cancelControlHiding()
         
         // Animations & positions
-        let animatonOffset = CGFloat(20)
+        let animatonOffset = CGFloat(0)
         let animationDuration = CFTimeInterval(animated ? 0.35 : 0.0)
 
         // Navigation bar
         if viewIsActive {
-            self.navigationController?.setNavigationBarHidden(hidden, animated: true)
+            self.navigationController?.setNavigationBarHidden(hidden, animated: false)
         }
         
         // Status bar
         if !leaveStatusBarAlone {
             // Hide status bar
-            statusBarShouldBeHidden = hidden
+            statusBarShouldBeHidden = false
             UIView.animate(
                 withDuration: animationDuration,
                 animations: {

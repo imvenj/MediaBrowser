@@ -58,7 +58,7 @@ class MediaTapDetectingImageView: UIImageView {
     }
 }
 
-protocol TapDetectingImageViewDelegate: class {
+protocol TapDetectingImageViewDelegate: AnyObject {
     func singleTapDetectedInImageView(view: UIImageView, touch: UITouch)
     func doubleTapDetectedInImageView(view: UIImageView, touch: UITouch)
     func tripleTapDetectedInImageView(view: UIImageView, touch: UITouch)
