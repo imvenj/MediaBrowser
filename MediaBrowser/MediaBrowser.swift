@@ -1483,7 +1483,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             let captionSize = cw.sizeThatFits(CGSize(width: pageFrame.size.width, height: 0.0))
             let captionFrame = CGRect(
                 x: pageFrame.origin.x,
-                y: pageFrame.size.height - captionSize.height - (toolbar.superview != nil ? toolbar.frame.size.height : 0.0),
+                y: pageFrame.size.height - captionSize.height - view.safeAreaInsets.bottom - (toolbar.superview != nil ? toolbar.frame.size.height : 0.0),
                 width: pageFrame.size.width,
                 height: captionSize.height)
             

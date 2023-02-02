@@ -113,82 +113,82 @@ class DemoData {
     class func webPhotos() -> [Media] {
         var photos = [Media]()
         
-        var photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/03/11/22/lapto-2575689_1280.jpg", caption: nil)
+        var photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/03/11/22/lapto-2575689_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/05/22/43/sticky-2586309_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/05/22/43/sticky-2586309_1280.jpg", caption: "web photo.")
         photos.append(photo)
 
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/07/26/11/18/coffee-2541286_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/07/26/11/18/coffee-2541286_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/01/01/16/computer-2562560_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/01/01/16/computer-2562560_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/01/00/00/peopl-2562135_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/01/00/00/peopl-2562135_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/06/10/19/people-2590997_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/06/10/19/people-2590997_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/02/09/18/40/robbe-2053165_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/02/09/18/40/robbe-2053165_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/03/27/21/31/money-2180330_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/03/27/21/31/money-2180330_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/01/20/15/12/orange-1995079_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/01/20/15/12/orange-1995079_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/03/07/13/02/thought-2123970_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/03/07/13/02/thought-2123970_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2014/02/23/09/17/thinking-272677_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2014/02/23/09/17/thinking-272677_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/05/15/17/43/cup-2315563_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/05/15/17/43/cup-2315563_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/02/14/26/winter-landscape-2571788_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/08/02/14/26/winter-landscape-2571788_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/01/05/11/16/icicle-1954827_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/01/05/11/16/icicle-1954827_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2014/12/13/15/42/alaska-566722_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2014/12/13/15/42/alaska-566722_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2013/02/13/12/06/greenland-81241_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2013/02/13/12/06/greenland-81241_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/01/08/13/51/greenland-1963003_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/01/08/13/51/greenland-1963003_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2016/07/30/16/17/skull-1557446_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2016/07/30/16/17/skull-1557446_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/03/15/21/16/checkmated-2147538_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/03/15/21/16/checkmated-2147538_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/03/04/14/19/helicopter-2116170_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/03/04/14/19/helicopter-2116170_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/02/11/10/33/spaceship-2057420_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/02/11/10/33/spaceship-2057420_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/03/13/21/09/ring-of-fire-2141192_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/03/13/21/09/ring-of-fire-2141192_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2012/04/13/20/40/ring-33573_1280.png", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2012/04/13/20/40/ring-33573_1280.png", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/02/02/22/08/tunnel-2033983_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/02/02/22/08/tunnel-2033983_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/02/04/12/51/labyrinth-2037286_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2017/02/04/12/51/labyrinth-2037286_1280.jpg", caption: "web photo.")
         photos.append(photo)
         
-        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2016/12/20/22/47/harley-1921700_1280.jpg", caption: nil)
+        photo = webMediaPhoto(url: "https://cdn.pixabay.com/photo/2016/12/20/22/47/harley-1921700_1280.jpg", caption: "web photo.")
         photos.append(photo)
 
         return photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos + photos
@@ -224,15 +224,15 @@ class DemoData {
     class func multiVideoThumbs() -> [Media] {
         var thumbs = [Media]()
         
-        var thumb = webMediaPhoto(url: "https://i.vimeocdn.com/video/612917789_640x360.jpg", caption: nil)
+        var thumb = webMediaPhoto(url: "https://i.vimeocdn.com/video/612917789_640x360.jpg", caption: "web photo.")
         thumb.isVideo = true
         thumbs.append(thumb)
         
-        thumb = webMediaPhoto(url: "https://i.vimeocdn.com/video/612415426_640x360.jpg", caption: nil)
+        thumb = webMediaPhoto(url: "https://i.vimeocdn.com/video/612415426_640x360.jpg", caption: "web photo.")
         thumb.isVideo = true
         thumbs.append(thumb)
 
-        thumb = webMediaPhoto(url: "https://i.vimeocdn.com/video/638284371_640x360.jpg", caption: nil)
+        thumb = webMediaPhoto(url: "https://i.vimeocdn.com/video/638284371_640x360.jpg", caption: "web photo.")
         thumb.isVideo = true
         thumbs.append(thumb)
 
