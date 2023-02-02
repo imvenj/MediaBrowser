@@ -123,7 +123,7 @@ extension ViewController {
         
         let displayActionButton = true
         var displaySelectionButtons = false
-        var displayMediaNavigationArrows = false
+        var displayMediaNavigationArrows = true
         var enableGrid = true
         var startOnGrid = false
         var autoPlayOnAppear = false

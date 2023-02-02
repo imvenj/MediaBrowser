@@ -24,21 +24,13 @@ class MediaGridCell: UICollectionViewCell {
     let loadingIndicator = UICircularProgressRing(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
 
     var circleImage: UIImage? {
-        if #available(iOS 13.0, *) {
-            let configuration = UIImage.SymbolConfiguration(pointSize: 24)
-            return UIImage(systemName: "circle", withConfiguration: configuration)
-        } else {
-            return UIImage.imageForResourcePath(name: "ImageSelectedSmallOff", inBundle: Bundle(for: MediaGridCell.self))
-        }
+        let configuration = UIImage.SymbolConfiguration(pointSize: 24)
+        return UIImage(systemName: "circle", withConfiguration: configuration)
     }
 
     var selectedCircleImage: UIImage? {
-        if #available(iOS 13.0, *) {
-            let configuration = UIImage.SymbolConfiguration(pointSize: 24)
-            return UIImage(systemName: "checkmark.circle", withConfiguration: configuration)
-        } else {
-            return UIImage.imageForResourcePath(name: "ImageSelectedSmallOn", inBundle: Bundle(for: MediaGridCell.self))
-        }
+        let configuration = UIImage.SymbolConfiguration(pointSize: 24)
+        return UIImage(systemName: "checkmark.circle", withConfiguration: configuration)
     }
     
     override init(frame: CGRect) {
@@ -59,15 +51,9 @@ class MediaGridCell: UICollectionViewCell {
         // Video Image
         videoIndicator.isHidden = false
         let videoIndicatorImage: UIImage
-
-        if #available(iOS 13.0, *) {
-            let configuration = UIImage.SymbolConfiguration(pointSize: 36)
-            videoIndicatorImage = UIImage(systemName: "video", withConfiguration: configuration)!
-        } else {
-            videoIndicatorImage = UIImage.imageForResourcePath(
-                name: "VideoOverlay",
-                inBundle: Bundle(for: MediaGridCell.self))!
-        }
+        
+        let configuration = UIImage.SymbolConfiguration(pointSize: 36)
+        videoIndicatorImage = UIImage(systemName: "video", withConfiguration: configuration)!
 
         videoIndicator.frame = CGRect(
             x: self.bounds.size.width - videoIndicatorImage.size.width - videoIndicatorPadding,
@@ -284,17 +270,11 @@ class MediaGridCell: UICollectionViewCell {
         if let p = photo, p.emptyImage {
             if nil == loadingError {
                 let error = UIImageView()
-
-                if #available(iOS 13.0, *) {
-                    let configuration = UIImage.SymbolConfiguration(pointSize: 24.0)
-                    let image = UIImage(systemName: "xmark", withConfiguration: configuration)
-                    error.image = image
-                    error.tintColor = .white
-                } else {
-                    error.image = UIImage.imageForResourcePath(
-                        name: "ImageError",
-                        inBundle: Bundle(for: MediaGridCell.self))
-                }
+                
+                let configuration = UIImage.SymbolConfiguration(pointSize: 24.0)
+                let image = UIImage(systemName: "xmark", withConfiguration: configuration)
+                error.image = image
+                error.tintColor = .white
                 
                 error.isUserInteractionEnabled = false
                 error.sizeToFit()

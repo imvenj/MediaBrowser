@@ -188,17 +188,10 @@ class MediaZoomingScrollView: UIScrollView, UIScrollViewDelegate, TapDetectingIm
             if p.emptyImage {
                 if nil == loadingError {
                     loadingError = UIImageView()
-                    if #available(iOS 13.0, *) {
-                        let configuration = UIImage.SymbolConfiguration(pointSize: 36.0)
-                        let image = UIImage(systemName: "xmark", withConfiguration: configuration)?.withTintColor(.white)
-                        loadingError?.image = image
-                        loadingError?.tintColor = .white
-                    } else {
-                        loadingError!.image =
-                            UIImage.imageForResourcePath(
-                            name: "ImageError",
-                            inBundle: Bundle(for: MediaZoomingScrollView.self))
-                    }
+                    let configuration = UIImage.SymbolConfiguration(pointSize: 36.0)
+                    let image = UIImage(systemName: "xmark", withConfiguration: configuration)?.withTintColor(.white)
+                    loadingError?.image = image
+                    loadingError?.tintColor = .white
                     
                     loadingError!.isUserInteractionEnabled = false
                     loadingError!.autoresizingMask =

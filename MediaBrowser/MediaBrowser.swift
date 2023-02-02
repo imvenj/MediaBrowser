@@ -281,6 +281,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             selector: #selector(handlePhotoLoadingDidEndNotification),
             name: MediaBrowser.mediaLoadingDidEndNotification,
             object: nil)
+        pagingScrollView.backgroundColor = UIColor.blue.withAlphaComponent(0.2)
     }
 
     deinit {
@@ -380,19 +381,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if displayMediaNavigationArrows {
             let previousButtonImage: UIImage?
             let nextButtonImage: UIImage?
-            if #available(iOS 13.0, *) {
-                let configuration = UIImage.SymbolConfiguration(pointSize: 18)
-                previousButtonImage = UIImage(systemName: "arrowtriangle.left", withConfiguration: configuration)
-                nextButtonImage = UIImage(systemName: "arrowtriangle.right", withConfiguration: configuration)
-            } else {
-                let arrowPathFormat = "UIBarButtonItemArrow"
-                previousButtonImage = UIImage.imageForResourcePath(
-                    name: arrowPathFormat + "Left",
-                    inBundle: Bundle(for: MediaBrowser.self))
-                nextButtonImage = UIImage.imageForResourcePath(
-                    name: arrowPathFormat + "Right",
-                    inBundle: Bundle(for: MediaBrowser.self))
-            }
+            let configuration = UIImage.SymbolConfiguration(pointSize: 18)
+            previousButtonImage = UIImage(systemName: "arrowtriangle.left", withConfiguration: configuration)
+            nextButtonImage = UIImage(systemName: "arrowtriangle.right", withConfiguration: configuration)
 
             previousButton = UIBarButtonItem(
                 image: previousButtonImage,
@@ -523,12 +514,8 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             hasItems = true
 
             let gridImage: UIImage?
-            if #available(iOS 13.0, *) {
-                let configuration = UIImage.SymbolConfiguration(pointSize: 18)
-                gridImage = UIImage(systemName: "square.grid.2x2", withConfiguration: configuration)
-            } else {
-                gridImage = UIImage.imageForResourcePath(name: "UIBarButtonItemGrid", inBundle: Bundle(for: MediaBrowser.self))
-            }
+            let configuration = UIImage.SymbolConfiguration(pointSize: 18)
+            gridImage = UIImage(systemName: "square.grid.2x2", withConfiguration: configuration)
 
             items.append(UIBarButtonItem(
                 image: gridImage,
@@ -592,24 +579,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         performingLayout = false
     }
 
-    var presentingViewControllerPrefersStatusBarHidden: Bool {
-        var presenting = presentingViewController
-        if let p = presenting as? UINavigationController {
-            presenting = p.topViewController
-        } else {
-            // We're in a navigation controller so get previous one!
-            if let navi = navigationController, navi.viewControllers.count > 1 {
-                presenting = navi.viewControllers[navi.viewControllers.count - 2]
-            }
-        }
-        
-        if let pres = presenting {
-            return pres.prefersStatusBarHidden
-        }
-        
-        return false
-    }
-
     //MARK: - Appearance
 
     /**
@@ -621,15 +590,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // Super
         super.viewWillAppear(animated)
         
-        // Status bar
-        if !viewHasAppearedInitially {
-            leaveStatusBarAlone = presentingViewControllerPrefersStatusBarHidden
-            // Check if status bar is hidden on first appear, and if so then ignore it
-            if UIApplication.shared.statusBarFrame.equalTo(CGRect.zero) {
-                leaveStatusBarAlone = true
-            }
-        }
-        
         // Navigation bar appearance
         if !viewIsActive && navigationController?.viewControllers[0] as? MediaBrowser !== self {
             storePreviousNavBarAppearance()
@@ -637,7 +597,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Set style
         if !leaveStatusBarAlone && UIDevice.current.userInterfaceIdiom == .phone {
-            previousStatusBarStyle = UIApplication.shared.statusBarStyle
             self.setNeedsStatusBarAppearanceUpdate()
         }
 
@@ -1224,17 +1183,12 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
                     let playButtonImage: UIImage?
                     let playButtonHighlightedImage: UIImage?
 
-                    if #available(iOS 13.0, *) {
-                        playButton = UIButton(type: .system)
-                        let configuration = UIImage.SymbolConfiguration(pointSize: 42)
-                        playButtonImage = UIImage(systemName: "play.circle", withConfiguration: configuration)
-                        playButtonHighlightedImage = UIImage(systemName: "play.circle", withConfiguration: configuration)
-                        playButton.tintColor = .white
-                    } else {
-                        playButton = UIButton(type: .custom)
-                        playButtonImage = UIImage(named: "PlayButtonOverlayLarge", in: Bundle(for: MediaBrowser.self), compatibleWith: nil)
-                        playButtonHighlightedImage = UIImage(named: "PlayButtonOverlayLargeTap", in: Bundle(for: MediaBrowser.self), compatibleWith: nil)
-                    }
+                    
+                    playButton = UIButton(type: .system)
+                    let configuration = UIImage.SymbolConfiguration(pointSize: 42)
+                    playButtonImage = UIImage(systemName: "play.circle", withConfiguration: configuration)
+                    playButtonHighlightedImage = UIImage(systemName: "play.circle", withConfiguration: configuration)
+                    playButton.tintColor = .white
                     playButton.setImage(playButtonImage, for: .normal)
                     playButton.setImage(playButtonHighlightedImage, for: .highlighted)
                     playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
@@ -1246,14 +1200,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
 
                 let circleImage: UIImage?
                 let selectedCircleImage: UIImage?
-                if #available(iOS 13.0, *) {
-                    let configuration = UIImage.SymbolConfiguration(pointSize: 24)
-                    circleImage = UIImage(systemName: "circle", withConfiguration: configuration)
-                    selectedCircleImage = UIImage(systemName: "checkmark.circle", withConfiguration: configuration)
-                } else {
-                    circleImage = UIImage.imageForResourcePath(name: "ImageSelectedSmallOff", inBundle: Bundle(for: MediaGridCell.self))
-                    selectedCircleImage = UIImage.imageForResourcePath(name: "ImageSelectedSmallOn", inBundle: Bundle(for: MediaGridCell.self))
-                }
+                let configuration = UIImage.SymbolConfiguration(pointSize: 24)
+                circleImage = UIImage(systemName: "circle", withConfiguration: configuration)
+                selectedCircleImage = UIImage(systemName: "checkmark.circle", withConfiguration: configuration)
 
                 // Add selected button
                 if self.displaySelectionButtons {
@@ -1437,12 +1386,14 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         // view, so its frame is in window coordinate space, which is never rotated. Its bounds, however, will be in landscape
         // because it has a rotation transform applied.
         let bounds = pagingScrollView.bounds
-        print("pagingScrollView for \(index) bounds: \(bounds)")
+        #if DEBUG
+        // print("pagingScrollView for \(index) bounds: \(bounds)")
+        #endif
         var pageFrame = bounds
         pageFrame.size.width -= (2.0 * padding)
         pageFrame.origin.x = (bounds.size.width * CGFloat(index)) + padding
         #if DEBUG
-        print("pageFrame for \(index): \(pageFrame.integral), padding: \(padding)")
+        // print("pageFrame for \(index): \(pageFrame.integral), padding: \(padding)")
         #endif
         return pageFrame.integral
     }
@@ -1466,10 +1417,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
             height = 32.0
         }
 
-        var safeAreaBottomInset = CGFloat(0)
-        if #available(iOS 11, *) {
-            safeAreaBottomInset = view.safeAreaInsets.bottom
-        }
+        let safeAreaBottomInset = view.safeAreaInsets.bottom
 
         let y = view.bounds.size.height - height - safeAreaBottomInset
         let width = view.bounds.size.width
@@ -1535,6 +1483,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Calculate current page
         let visibleBounds = pagingScrollView.bounds
+        print("visuble bounds: ", visibleBounds)
         var index = Int(floorf(Float(visibleBounds.midX / visibleBounds.width)))
         if index < 0 {
             index = 0
@@ -1731,19 +1680,12 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         if let avPlayerViewController = currentVideoPlayerViewController {
             avPlayerViewController.modalTransitionStyle = .crossDissolve
-            if #available(iOS 11.0, *) {
-                avPlayerViewController.exitsFullScreenWhenPlaybackEnds = true
-            }
+            avPlayerViewController.exitsFullScreenWhenPlaybackEnds = true
             avPlayerViewController.allowsPictureInPicturePlayback = false
             
             do {
                 // Work Around for Apple API Error.
-                if #available(iOS 10.0, *) {
-                    try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-                } else {
-                    // Fallback on earlier versions
-                    AVAudioSession.sharedInstance().perform(NSSelectorFromString("setCategory:error:"), with: AVAudioSession.Category.playback)
-                }
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
                 try AVAudioSession.sharedInstance().setActive(true)
             } catch let error as NSError {
                 print(error)
@@ -1999,15 +1941,6 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if !permanent {
             hideControlsAfterDelay()
         }
-    }
-
-    /// prefersStatusBarHidden
-    public override var prefersStatusBarHidden: Bool {
-        if !leaveStatusBarAlone {
-            return statusBarShouldBeHidden
-        }
-        
-        return presentingViewControllerPrefersStatusBarHidden
     }
     
     /// preferredStatusBarUpdateAnimation
