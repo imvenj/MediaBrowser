@@ -1441,7 +1441,9 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         var pageFrame = bounds
         pageFrame.size.width -= (2.0 * padding)
         pageFrame.origin.x = (bounds.size.width * CGFloat(index)) + padding
+        #if DEBUG
         print("pageFrame for \(index): \(pageFrame.integral), padding: \(padding)")
+        #endif
         return pageFrame.integral
     }
 

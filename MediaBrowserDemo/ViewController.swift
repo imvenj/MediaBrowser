@@ -26,8 +26,9 @@ class ViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBar.tintColor = UIColor.black
-        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
 
     override func viewDidLoad() {
@@ -44,7 +45,7 @@ class ViewController: UITableViewController {
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font],
                                                 for: .normal)
         segmentedControl.addTarget(self, action: #selector(segmentControlChanged), for: .valueChanged)
-        segmentedControl.selectedSegmentIndex = 1
+        segmentedControl.selectedSegmentIndex = 0
     }
 
     override func didReceiveMemoryWarning() {
