@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "MediaBrowser",
-    platforms: [.iOS(.v10)],
+    platforms: [.iOS(.v13)],
     products: [
         .library(
             name: "MediaBrowser",
@@ -21,5 +21,5 @@ let package = Package(
             dependencies: ["Kingfisher", "UICircularProgressRing"],
             path: "MediaBrowser")
     ],
-    swiftLanguageVersions: [.v4_2, .v5]
+    swiftLanguageVersions: [.v5]
 )
