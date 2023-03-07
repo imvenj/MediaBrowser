@@ -140,11 +140,6 @@
       "size" : "83.5x83.5"
     },
     {
-      "idiom" : "ios-marketing",
-      "scale" : "1x",
-      "size" : "1024x1024"
-    },
-    {
       "filename" : "Icon-60@2x.png",
       "idiom" : "car",
       "scale" : "2x",
@@ -155,6 +150,66 @@
       "idiom" : "car",
       "scale" : "3x",
       "size" : "60x60"
+    },
+    {
+      "idiom" : "ios-marketing",
+      "scale" : "1x",
+      "size" : "1024x1024"
+    },
+    {
+      "filename" : "Icon-16.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "16x16"
+    },
+    {
+      "filename" : "Icon-32.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "16x16"
+    },
+    {
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "32x32"
+    },
+    {
+      "filename" : "Icon-64.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "32x32"
+    },
+    {
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "128x128"
+    },
+    {
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "128x128"
+    },
+    {
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "256x256"
+    },
+    {
+      "filename" : "iTunesArtwork.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "256x256"
+    },
+    {
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "512x512"
+    },
+    {
+      "filename" : "iTunesArtwork@2x.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "512x512"
     },
     {
       "filename" : "Icon-mdpi.png",
@@ -228,6 +283,13 @@
     },
     {
       "idiom" : "watch",
+      "role" : "appLauncher",
+      "scale" : "2x",
+      "size" : "54x54",
+      "subtype" : "49mm"
+    },
+    {
+      "idiom" : "watch",
       "role" : "quickLook",
       "scale" : "2x",
       "size" : "86x86",
@@ -255,64 +317,16 @@
       "subtype" : "45mm"
     },
     {
+      "idiom" : "watch",
+      "role" : "quickLook",
+      "scale" : "2x",
+      "size" : "129x129",
+      "subtype" : "49mm"
+    },
+    {
       "idiom" : "watch-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
-    },
-    {
-      "filename" : "Icon-16.png",
-      "idiom" : "mac",
-      "scale" : "1x",
-      "size" : "16x16"
-    },
-    {
-      "filename" : "Icon-32.png",
-      "idiom" : "mac",
-      "scale" : "2x",
-      "size" : "16x16"
-    },
-    {
-      "idiom" : "mac",
-      "scale" : "1x",
-      "size" : "32x32"
-    },
-    {
-      "filename" : "Icon-64.png",
-      "idiom" : "mac",
-      "scale" : "2x",
-      "size" : "32x32"
-    },
-    {
-      "idiom" : "mac",
-      "scale" : "1x",
-      "size" : "128x128"
-    },
-    {
-      "idiom" : "mac",
-      "scale" : "2x",
-      "size" : "128x128"
-    },
-    {
-      "idiom" : "mac",
-      "scale" : "1x",
-      "size" : "256x256"
-    },
-    {
-      "filename" : "iTunesArtwork.png",
-      "idiom" : "mac",
-      "scale" : "2x",
-      "size" : "256x256"
-    },
-    {
-      "idiom" : "mac",
-      "scale" : "1x",
-      "size" : "512x512"
-    },
-    {
-      "filename" : "iTunesArtwork@2x.png",
-      "idiom" : "mac",
-      "scale" : "2x",
-      "size" : "512x512"
     }
   ],
   "info" : {

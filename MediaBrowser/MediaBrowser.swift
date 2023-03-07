@@ -343,7 +343,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         if !enableGrid {
             startOnGrid = false
         }
-        
+                    
         // View
         view.clipsToBounds = true
         
@@ -376,6 +376,10 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .compact)
         toolbar.barStyle = .default
         toolbar.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+        let appearance = UIToolbarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .black
+        toolbar.standardAppearance = appearance
         
         // Toolbar Items
         if displayMediaNavigationArrows {
@@ -1483,7 +1487,7 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
         
         // Calculate current page
         let visibleBounds = pagingScrollView.bounds
-        print("visuble bounds: ", visibleBounds)
+        // print("visuble bounds: ", visibleBounds)
         var index = Int(floorf(Float(visibleBounds.midX / visibleBounds.width)))
         if index < 0 {
             index = 0
@@ -1592,6 +1596,33 @@ public class MediaBrowser: UIViewController, UIScrollViewDelegate, UIActionSheet
     
     @objc func gotoNextPage() {
         showNextPhotoAnimated(animated: false)
+    }
+    
+    public override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        var didHandleEvent = false
+            for press in presses {
+                guard let key = press.key else { continue }
+                if key.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow {
+                    showPreviousPhotoAnimated(animated: true)
+                    didHandleEvent = true
+                }
+                if key.charactersIgnoringModifiers == UIKeyCommand.inputRightArrow {
+                    showNextPhotoAnimated(animated: true)
+                    didHandleEvent = true
+                }
+                if key.charactersIgnoringModifiers == UIKeyCommand.inputUpArrow {
+                    if gridController == nil {
+                        print("trigger grid")
+                        showGrid(animated: true)
+                    }
+                    didHandleEvent = true
+                }
+            }
+            
+            if didHandleEvent == false {
+                // Didn't handle this key press, so pass the event to the next responder.
+                super.pressesBegan(presses, with: event)
+            }
     }
 
     func showPreviousPhotoAnimated(animated: Bool) {
