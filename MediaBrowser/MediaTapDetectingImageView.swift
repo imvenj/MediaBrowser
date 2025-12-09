@@ -8,8 +8,9 @@
 //
 
 import UIKit
+import Kingfisher
 
-class MediaTapDetectingImageView: UIImageView {
+class MediaTapDetectingImageView: AnimatedImageView {
     weak var tapDelegate: TapDetectingImageViewDelegate?
     
     override init(frame: CGRect) {
